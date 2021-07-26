@@ -20,10 +20,12 @@ window.onload = () => {
         
         const noteTitle = document.querySelector("#noteTitle").value
         const noteText = document.querySelector("#noteText").value
+        const listValue = document.querySelector("#list").value
 
         firebase.database().ref(`/users/${googleUser.uid}/notes`).push({
             title: noteTitle,
-            text: noteText
+            text: noteText,
+            tag: listValue
         }).then(() => {
             console.log("added note")
             document.querySelector("#noteTitle").value = ""
@@ -33,8 +35,6 @@ window.onload = () => {
         })
 
     })
-
-
 
 
 
