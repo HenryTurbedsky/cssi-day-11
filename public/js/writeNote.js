@@ -12,12 +12,35 @@ window.onload = () => {
         }
     })
 
+
+
+
+    const createNoteButton = document.querySelector("#createNoteButton")
+    createNoteButton.addEventListener("click", () => {
+        
+        const noteTitle = document.querySelector("#noteTitle").value
+        const noteText = document.querySelector("#noteText").value
+
+        firebase.database().ref(`/users/${googleUser.uid}/notes`).push({
+            title: noteTitle,
+            text: noteText
+        }).then(() => {
+            console.log("added note")
+            document.querySelector("#noteTitle").value = ""
+            document.querySelector("#noteText").value = ""
+        }).catch(error => {
+            console.log("error writing new note: ", error)
+        })
+
+    })
+
+
+
+
+
 }
 
-const createNoteButton = document.querySelector("#createNoteButton")
-createNoteButton.addEventListener("click", () => {
-    console.log(createNoteButton)
-})
+
 
 
 
